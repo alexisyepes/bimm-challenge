@@ -1,45 +1,33 @@
-Project: Audi Car Inventory Manager - Final Integration
+Project: Car Inventory Manager - Production Ready
 
 Target Stack: 
 - React 19, TypeScript, Material UI (MUI).
 - Apollo Client for GraphQL.
 - MSW for API Mocking (Ensure field names match src/mocks/data.ts).
 
-Core Architectural Requirements:
-1. Data Schema: 
-   - Use 'make', 'model', 'year', 'color', and 'image' fields.
-   - Images must support 'mobile', 'tablet', and 'desktop' properties.
-2. GraphQL Layer:
-   - File: src/graphql/queries.ts -> Export 'GET_CARS' query.
-   - File: src/graphql/mutations.ts -> Export 'ADD_CAR' mutation.
-3. Apollo Client Configuration (STRICT PATHS):
-   - Use ONLY the existing client at src/graphql/client.ts. Do not create a new one.
-   - In src/App.tsx, the import MUST be: import { client } from './graphql/client';
-   - In components (inside src/components/), the import MUST be: import { client } from '../graphql/client';
-4. Data Flow & State Management (Lifting State Up):
-   - App.tsx MUST own the states for 'searchTerm' (string) and 'sortBy' (string) using React.useState.
-   - App.tsx passes 'setSearchTerm' to SearchBar and 'setSortBy' to SortActions.
-   - The 'useCars' hook must receive these states or App.tsx must filter/sort the 'cars' array before passing it to CarList.
-   - Logic Location: Ensure the UI stays in sync by using derived state for filtering/sorting.
+1. Data Architecture (NON-NEGOTIABLE):
+   - Schema: { make: string, model: string, year: number, color: string, image: { mobile: string, tablet: string, desktop: string } }
+   - Note: The 'image' field is a NESTED OBJECT. Never use flat fields for images.
 
-Functional Requirements:
-1. Inventory UI & Interaction:
-   - CarList: Use a MUI Grid to display CarCards.
-   - SearchBar: Real-time filtering by 'model' field (must call setSearchTerm on onChange).
-   - SortActions: Buttons or Select to sort the list by 'year' (descending) and 'make' (ascending).
-2. Responsive CarCard:
-   - Implement logic to switch images at breakpoints: Mobile (<= 640px), Tablet (641px-1023px), Desktop (>= 1024px).
-   - Use MUI Card, CardMedia, and CardContent for a premium look.
-3. Form Behavior & Data Persistence:
-   - AddCarForm: A controlled MUI form (TextFields for make, model, year, color).
-   - Visibility: Place the form inside a MUI 'Dialog' (Modal) or 'Collapse', triggered by an "Add New Car" button.
-   - UX: After a successful 'AddCar' mutation, use 'refetchQueries: ["GetCars"]' to refresh the list automatically.
+2. State Management (Lifting State Up):
+   - App.tsx MUST manage all shared state using React.useState.
+   - States: 
+     * const [searchTerm, setSearchTerm] = useState<string>("");
+     * const [sortBy, setSortBy] = useState<"year" | "make">("make");
+   - Child components (SearchBar, SortActions) MUST NOT have internal state for these values. They must receive value and setter via props.
 
-Final Integration (Critical):
-- Main Entry: Update src/App.tsx to remove all placeholder text.
-- Layout: Render the SearchBar, SortActions, AddCarForm trigger, and the CarList in a clean, centered container.
-- Ensure the app is fully functional and passes 'npm run typecheck'.
+3. GraphQL & Apollo Configuration:
+   - Client: Use ONLY the existing client at src/graphql/client.ts.
+   - Imports: 
+     * In App.tsx: import { client } from './graphql/client';
+     * In components: import { client } from '../graphql/client';
+   - Mutations: Use 'refetchQueries: ["GetCars"]' (or matching query name) for sync.
 
-Testing Requirement:
-- Create unit tests in src/components/__tests__ for CarCard and AddCarForm.
-- Tests must verify that the AddCarForm submits correctly and CarCard renders responsive images.
+4. Component & UI Requirements:
+   - AddCarForm: A MUI Dialog (Modal) that handles its own visibility state but executes the mutation.
+   - CarCard: Responsive logic for image switching at 640px and 1024px.
+   - Layout: Clean, centered MUI Container.
+
+5. Testing Requirement:
+   - Create unit tests in src/components/__tests__ for CarCard and AddCarForm.
+   - Verify responsive image rendering and form submission.
