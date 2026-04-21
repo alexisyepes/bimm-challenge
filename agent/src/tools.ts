@@ -29,7 +29,7 @@ export const tools = {
 		}
 
 		fs.writeFileSync(fullPath, content, "utf-8");
-		console.log(`[File System] Escrito: ${relativePath}`);
+		console.log(`[File System] Written: ${relativePath}`);
 	},
 
 	runShellCommand: (command: string): { success: boolean; output: string } => {

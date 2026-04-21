@@ -12,25 +12,33 @@ Core Architectural Requirements:
 2. GraphQL Layer:
    - File: src/graphql/queries.ts -> Export 'GET_CARS' query.
    - File: src/graphql/mutations.ts -> Export 'ADD_CAR' mutation.
-3. State & Logic:
-   - Hook: src/hooks/useCars.ts -> Return { cars, loading, error, addCar }.
-   - Ensure the hook handles local filtering (search) and sorting logic.
+3. Apollo Client Configuration (STRICT PATHS):
+   - Use ONLY the existing client at src/graphql/client.ts. Do not create a new one.
+   - In src/App.tsx, the import MUST be: import { client } from './graphql/client';
+   - In components (inside src/components/), the import MUST be: import { client } from '../graphql/client';
+4. Data Flow & State Management (Lifting State Up):
+   - App.tsx MUST own the states for 'searchTerm' (string) and 'sortBy' (string) using React.useState.
+   - App.tsx passes 'setSearchTerm' to SearchBar and 'setSortBy' to SortActions.
+   - The 'useCars' hook must receive these states or App.tsx must filter/sort the 'cars' array before passing it to CarList.
+   - Logic Location: Ensure the UI stays in sync by using derived state for filtering/sorting.
 
 Functional Requirements:
-1. Responsive CarCard:
-   - Implement logic to switch images at breakpoints: Mobile (<= 640px), Tablet (641px-1023px), Desktop (>= 1024px).
-   - Use MUI Card, CardMedia, and CardContent.
-2. Inventory UI:
+1. Inventory UI & Interaction:
    - CarList: Use a MUI Grid to display CarCards.
-   - SearchBar: Real-time filtering by 'model'.
-   - SortActions: Buttons or Select to sort by 'year' (desc) and 'make' (asc).
-3. Data Entry:
-   - AddCarForm: A controlled MUI form. On submit, it must call the addCar mutation and update the UI list.
+   - SearchBar: Real-time filtering by 'model' field (must call setSearchTerm on onChange).
+   - SortActions: Buttons or Select to sort the list by 'year' (descending) and 'make' (ascending).
+2. Responsive CarCard:
+   - Implement logic to switch images at breakpoints: Mobile (<= 640px), Tablet (641px-1023px), Desktop (>= 1024px).
+   - Use MUI Card, CardMedia, and CardContent for a premium look.
+3. Form Behavior & Data Persistence:
+   - AddCarForm: A controlled MUI form (TextFields for make, model, year, color).
+   - Visibility: Place the form inside a MUI 'Dialog' (Modal) or 'Collapse', triggered by an "Add New Car" button.
+   - UX: After a successful 'AddCar' mutation, use 'refetchQueries: ["GetCars"]' to refresh the list automatically.
 
 Final Integration (Critical):
 - Main Entry: Update src/App.tsx to remove all placeholder text.
-- Layout: Render the SearchBar, SortActions, AddCarForm (in a Modal or top section), and the CarList.
-- Ensure the app is fully functional upon 'npm run dev'.
+- Layout: Render the SearchBar, SortActions, AddCarForm trigger, and the CarList in a clean, centered container.
+- Ensure the app is fully functional and passes 'npm run typecheck'.
 
 Testing Requirement:
 - Create unit tests in src/components/__tests__ for CarCard and AddCarForm.
