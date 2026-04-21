@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"lib": ["ESNext"],
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"strict": true,
+		"outDir": "./dist",
+		"rootDir": "./",
+		"resolveJsonModule": true,
+		"noEmit": true
+	},
+	"include": ["src/**/*", "prompts/**/*"],
+	"exclude": ["node_modules"]
+}

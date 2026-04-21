@@ -1,0 +1,37 @@
+Project: Audi Car Inventory Manager - Final Integration
+
+Target Stack: 
+- React 19, TypeScript, Material UI (MUI).
+- Apollo Client for GraphQL.
+- MSW for API Mocking (Ensure field names match src/mocks/data.ts).
+
+Core Architectural Requirements:
+1. Data Schema: 
+   - Use 'make', 'model', 'year', 'color', and 'image' fields.
+   - Images must support 'mobile', 'tablet', and 'desktop' properties.
+2. GraphQL Layer:
+   - File: src/graphql/queries.ts -> Export 'GET_CARS' query.
+   - File: src/graphql/mutations.ts -> Export 'ADD_CAR' mutation.
+3. State & Logic:
+   - Hook: src/hooks/useCars.ts -> Return { cars, loading, error, addCar }.
+   - Ensure the hook handles local filtering (search) and sorting logic.
+
+Functional Requirements:
+1. Responsive CarCard:
+   - Implement logic to switch images at breakpoints: Mobile (<= 640px), Tablet (641px-1023px), Desktop (>= 1024px).
+   - Use MUI Card, CardMedia, and CardContent.
+2. Inventory UI:
+   - CarList: Use a MUI Grid to display CarCards.
+   - SearchBar: Real-time filtering by 'model'.
+   - SortActions: Buttons or Select to sort by 'year' (desc) and 'make' (asc).
+3. Data Entry:
+   - AddCarForm: A controlled MUI form. On submit, it must call the addCar mutation and update the UI list.
+
+Final Integration (Critical):
+- Main Entry: Update src/App.tsx to remove all placeholder text.
+- Layout: Render the SearchBar, SortActions, AddCarForm (in a Modal or top section), and the CarList.
+- Ensure the app is fully functional upon 'npm run dev'.
+
+Testing Requirement:
+- Create unit tests in src/components/__tests__ for CarCard and AddCarForm.
+- Tests must verify that the AddCarForm submits correctly and CarCard renders responsive images.

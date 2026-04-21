@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+agent/node_modules/
+
+# Env Variables
+.env
+agent/.env
+
+# Temp files
+dist/
+.DS_Store
+*.log
