@@ -11,7 +11,7 @@ export const planner = {
 		const response = await openai.chat.completions.create({
 			model: "gpt-4o",
 			messages: [
-				{ role: "system", content: PLANNER_SYSTEM_PROMPT }, // Usas el prompt separado
+				{ role: "system", content: PLANNER_SYSTEM_PROMPT },
 				{ role: "user", content: `Esta es la especificación: ${spec}` },
 			],
 			response_format: { type: "json_object" },

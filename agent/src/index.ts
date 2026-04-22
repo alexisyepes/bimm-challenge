@@ -23,7 +23,7 @@ async function main() {
 			const check = validator.validateTypes();
 			if (check.isValid) {
 				isValid = true;
-				console.log(`✅ ${task.file} is valid.`);
+				console.log(`${task.file} is valid.`);
 			} else {
 				if (!check.errorLog.includes(task.file)) {
 					console.log(

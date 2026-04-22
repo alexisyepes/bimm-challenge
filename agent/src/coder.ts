@@ -61,7 +61,7 @@ export const coder = {
 	},
 
 	fixCode: async (filePath: string, errorMessage: string) => {
-		console.log(`\n🔧 Attempting to fix: ${filePath}...`);
+		console.log(`\nAttempting to fix: ${filePath}...`);
 
 		const brokenCode = tools.readFile(filePath);
 		const projectContext = coder.getContext();
