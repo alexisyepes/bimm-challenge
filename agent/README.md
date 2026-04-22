@@ -49,10 +49,12 @@ The agent follows a Plan-and-Execute pattern with a Self-Correction feedback loo
 1. Navigate to the /agent directory and run: `npm install`
 
 2. Configure Environment:
-   Create a .env file in the /agent directory and add your key:
+
+- The agent is currently optimized for OpenAI's GPT-4o model to ensure high-fidelity code generation and strict adherence to JSON schema planning.
+- Create a .env file in the /agent directory and add your key:
 
 ```
-OPENAI_API_KEY=your_key_here
+OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 ### Execute the Loop:
