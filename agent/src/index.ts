@@ -23,14 +23,23 @@ async function main() {
 			const check = validator.validateTypes();
 			if (check.isValid) {
 				isValid = true;
-				console.log(`${task.file} is valid.`);
+				console.log(`✅ ${task.file} is valid.`);
 			} else {
-				console.log(`Error in ${task.file}. Retrying...`);
+				if (!check.errorLog.includes(task.file)) {
+					console.log(
+						`⚠️ Unrelated errors in other files. Skipping validation for ${task.file}.`,
+					);
+					isValid = true;
+					break;
+				}
+
+				console.log(`Error in ${task.file}. Attempting fix...`);
 				await coder.fixCode(task.file, check.errorLog);
 				attempts++;
 			}
 		}
 	}
+
 	console.log("Application generated successfully!");
 }
 

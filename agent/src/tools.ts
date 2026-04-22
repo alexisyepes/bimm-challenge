@@ -19,6 +19,14 @@ export const tools = {
 	},
 
 	writeFile: (relativePath: string, content: string): void => {
+		const protectedFiles = ["src/mocks/data.ts", "src/graphql/client.ts"];
+		if (protectedFiles.includes(relativePath)) {
+			console.warn(
+				`[SECURITY] Blocked attempt to overwrite protected file: ${relativePath}`,
+			);
+			return;
+		}
+
 		const fullPath = path.join(PROJECT_ROOT, relativePath);
 		const dir = path.dirname(fullPath);
 
