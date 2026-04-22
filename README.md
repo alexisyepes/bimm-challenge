@@ -3,7 +3,7 @@
 ### Note for Evaluators: This project was built using an autonomous AI Agent.
 
 - To see the full documentation of the Agent: [Click here to view the Agent README](https://github.com/alexisyepes/bimm-challenge/tree/master/agent)
-- To see the generated app: Run npm run dev in the root folder of the boilerplate provided.
+- To see the generated app: Run npm run dev in the root folder of the boilerplate provided
 
 # Senior Fullstack Engineer — Take-Home Challenge
 
