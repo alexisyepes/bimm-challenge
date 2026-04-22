@@ -1,3 +1,10 @@
+# BIMM Agentic Solution by Alex Yepes
+
+### Note for Evaluators: This project was built using an autonomous AI Agent.
+
+- To see the full documentation of the Agent: [Click here to view the Agent README](https://github.com/alexisyepes/bimm-challenge/tree/master/agent)
+- To see the generated app: Run npm run dev in the root folder of the boilerplate provided.
+
 # Senior Fullstack Engineer — Take-Home Challenge
 
 ## Agentic Code Generation Workflow
@@ -89,14 +96,14 @@ The boilerplate provides a `Car` type and 5 seed cars:
 
 ```typescript
 interface Car {
-  id: string;
-  make: string;
-  model: string;
-  year: number;
-  color: string;
-  mobile: string;
-  tablet: string;
-  desktop: string;
+	id: string;
+	make: string;
+	model: string;
+	year: number;
+	color: string;
+	mobile: string;
+	tablet: string;
+	desktop: string;
 }
 ```
 
@@ -133,13 +140,13 @@ We're evaluating **how you design the agentic loop**, not just whether the outpu
 
 Your system should demonstrate:
 
-| Concept | What We're Looking For |
-|---|---|
-| **Task Decomposition** | The agent breaks the spec into ordered, dependency-aware steps — not one giant prompt |
-| **Tool Use** | The agent calls tools (file write, shell commands, LLM calls) as discrete actions |
-| **Context Management** | The agent passes relevant context between steps without exceeding token limits |
-| **Error Recovery** | The agent reads test or type-check output and feeds errors back into the generation loop |
-| **Prompt Design** | Prompts are structured, specific, and use techniques like few-shot examples or schema enforcement |
+| Concept                | What We're Looking For                                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------------------- |
+| **Task Decomposition** | The agent breaks the spec into ordered, dependency-aware steps — not one giant prompt             |
+| **Tool Use**           | The agent calls tools (file write, shell commands, LLM calls) as discrete actions                 |
+| **Context Management** | The agent passes relevant context between steps without exceeding token limits                    |
+| **Error Recovery**     | The agent reads test or type-check output and feeds errors back into the generation loop          |
+| **Prompt Design**      | Prompts are structured, specific, and use techniques like few-shot examples or schema enforcement |
 
 ### How You Work Matters
 
@@ -162,20 +169,20 @@ Beyond the code itself, we want to see **how you approach the problem**:
 
 ### Primary (70%)
 
-| Criteria | Weight | Description |
-|---|---|---|
-| **Agent Design** | 25% | Quality of the agentic loop: planning, execution, validation, retry. Is it a real workflow or a wrapper around a single prompt? |
-| **Output Quality** | 20% | Does the generated app work? Does it meet the functional spec? |
-| **Prompt Engineering** | 15% | Are prompts well-structured? Do they constrain output format and provide the right context at each step? |
-| **Error Handling** | 10% | Does the agent recover from generation failures gracefully? |
+| Criteria               | Weight | Description                                                                                                                     |
+| ---------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| **Agent Design**       | 25%    | Quality of the agentic loop: planning, execution, validation, retry. Is it a real workflow or a wrapper around a single prompt? |
+| **Output Quality**     | 20%    | Does the generated app work? Does it meet the functional spec?                                                                  |
+| **Prompt Engineering** | 15%    | Are prompts well-structured? Do they constrain output format and provide the right context at each step?                        |
+| **Error Handling**     | 10%    | Does the agent recover from generation failures gracefully?                                                                     |
 
 ### Secondary (30%)
 
-| Criteria | Weight | Description |
-|---|---|---|
-| **Code Quality (of the agent)** | 10% | Is the agent code clean, typed, and well-organized? |
-| **Documentation** | 10% | README explaining architecture decisions, how to run, and tradeoffs |
-| **Creativity** | 10% | Bonus features: multi-agent collaboration, caching, parallel generation, cost optimization |
+| Criteria                        | Weight | Description                                                                                |
+| ------------------------------- | ------ | ------------------------------------------------------------------------------------------ |
+| **Code Quality (of the agent)** | 10%    | Is the agent code clean, typed, and well-organized?                                        |
+| **Documentation**               | 10%    | README explaining architecture decisions, how to run, and tradeoffs                        |
+| **Creativity**                  | 10%    | Bonus features: multi-agent collaboration, caching, parallel generation, cost optimization |
 
 ---
 
