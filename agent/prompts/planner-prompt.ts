@@ -1,4 +1,3 @@
-// agent/prompts/planner-prompt.ts
 export const PLANNER_SYSTEM_PROMPT = `
 You are a Senior Software Architect. Your goal is to decompose a product spec into a sequence of atomic, file-based tasks.
 
